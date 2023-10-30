@@ -8,31 +8,51 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
-
-    - name: Build Docker image
+    - name: Install Google Cloud SDK
       run: |
-        docker build -t multi-client ./client
-        docker build -t multi-nginx ./nginx
-        docker build -t multi-server ./server
-        docker build -t multi-worker ./worker
-
-    - name: Tag Docker image
-      run: |
-        docker tag multi-client bhupesh0215/multi-client:v5
-        docker tag multi-nginx bhupesh0215/multi-nginx:v5
-        docker tag multi-server bhupesh0215/multi-server:v5
-        docker tag multi-worker bhupesh0215/multi-worker:v5
+        # Add the Google Cloud SDK distribution URL as a package source
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
         
-    - name: Push Docker image
+        # Import the Google Cloud public key
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+
+        # Update the package list and install the Google Cloud SDK
+        sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+    - name: Configure Google Cloud SDK
       run: |
-        docker push bhupesh0215/multi-client:v5
-        docker push bhupesh0215/multi-nginx:v5
-        docker push bhupesh0215/multi-server:v5
-        docker push bhupesh0215/multi-worker:v5
+        # Authenticate using a service account key or other methods
+        gcloud auth activate-service-account --key-file=path-to-your-service-account-key.json
+        gcloud config set project your-project-id
+
+    - name: Verify Google Cloud SDK installation
+      run: gcloud version
+
+    # - name: Login to Docker Hub
+    #   run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    # - name: Build Docker image
+    #   run: |
+    #     docker build -t multi-client ./client
+    #     docker build -t multi-nginx ./nginx
+    #     docker build -t multi-server ./server
+    #     docker build -t multi-worker ./worker
+
+    # - name: Tag Docker image
+    #   run: |
+    #     docker tag multi-client bhupesh0215/multi-client:v5
+    #     docker tag multi-nginx bhupesh0215/multi-nginx:v5
+    #     docker tag multi-server bhupesh0215/multi-server:v5
+    #     docker tag multi-worker bhupesh0215/multi-worker:v5
+        
+    # - name: Push Docker image
+    #   run: |
+    #     docker push bhupesh0215/multi-client:v5
+    #     docker push bhupesh0215/multi-nginx:v5
+    #     docker push bhupesh0215/multi-server:v5
+    #     docker push bhupesh0215/multi-worker:v5
