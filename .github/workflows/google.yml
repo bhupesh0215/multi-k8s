@@ -50,4 +50,4 @@ jobs:
     - name: Create docker image and deploy 
       run: |
         chmod +x your-script.sh
-        ./your-script.sh
+        ./deploy.sh
