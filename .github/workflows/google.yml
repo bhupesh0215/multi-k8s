@@ -49,5 +49,5 @@ jobs:
     # Create Docker image and deploy
     - name: Create docker image and deploy 
       run: |
-        chmod +x your-script.sh
+        chmod +x deploy.sh
         ./deploy.sh
