@@ -18,12 +18,12 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: us-central1-c   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  REPOSITORY: samples # TODO: update to Artifact Registry docker repository
-  IMAGE: static-site
+  GAR_LOCATION: asia-south1 # TODO: update region of the Artifact Registry
+  GKE_CLUSTER: multi-k8s-cluster    # TODO: update to cluster name
+  GKE_ZONE: asia-southeast1-a   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: multi-k8s-deployment # TODO: update to deployment name
+  REPOSITORY: multi-k8s # TODO: update to Artifact Registry docker repository
+  IMAGE: multi-client
 
 jobs:
   setup-build-publish-deploy:
