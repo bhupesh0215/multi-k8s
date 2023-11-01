@@ -49,6 +49,27 @@ jobs:
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
 
+    - name: Build Docker image
+      run: |
+        docker build -t multi-client ./client
+        docker build -t multi-nginx ./nginx
+        docker build -t multi-server ./server
+        docker build -t multi-worker ./worker
+
+    - name: Tag Docker image
+      run: |
+        docker tag multi-client bhupesh0215/multi-client:v5
+        docker tag multi-nginx bhupesh0215/multi-nginx:v5
+        docker tag multi-server bhupesh0215/multi-server:v5
+        docker tag multi-worker bhupesh0215/multi-worker:v5
+        
+    - name: Push Docker image
+      run: |
+        docker push bhupesh0215/multi-client:v5
+        docker push bhupesh0215/multi-nginx:v5
+        docker push bhupesh0215/multi-server:v5
+        docker push bhupesh0215/multi-worker:v5
+    
     # Create Docker image and deploy
     - name: Create docker image and deploy 
       run: |
