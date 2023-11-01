@@ -70,8 +70,12 @@ jobs:
         docker push bhupesh0215/multi-server:v5
         docker push bhupesh0215/multi-worker:v5
     
-    # Create Docker image and deploy
-    - name: Create docker image and deploy 
+    # Deploy to GKE
+    - name: Deploy to GKE
       run: |
-        chmod +x deploy.sh
-        ./deploy.sh
+        kubectl apply -f k8s
+        kubectl set image deployments/server-deployment server=bhupesh0215/multi-server
+
+
+
+
