@@ -65,11 +65,13 @@ jobs:
         docker push bhupesh0215/multi-server
         docker push bhupesh0215/multi-worker
     
-    # # Deploy to GKE
-    # - name: Deploy to GKE
-    #   run: |
-    #     kubectl apply -f k8s
-    #     kubectl set image deployments/server-deployment server=bhupesh0215/multi-server
+    # Deploy to GKE
+    - name: Deploy to GKE
+      run: |
+        kubectl apply -f k8s
+        kubectl set image deployments/client-deployment server=bhupesh0215/multi-client:$GIT_SHA
+        kubectl set image deployments/server-deployment server=bhupesh0215/multi-server:$GIT_SHA
+        kubectl set image deployments/worker-deployment server=bhupesh0215/multi-worker:$GIT_SHA
 
 
 
