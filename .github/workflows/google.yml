@@ -51,9 +51,9 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t multi-client:latest -t multi-client:$GIT_SHA -f ./client/Dockerfile ./client
-        docker build -t multi-server:latest -t multi-server:$GIT_SHA -f ./server/Dockerfile ./server
-        docker build -t multi-worker:latest -t multi-worker:$GIT_SHA -f ./worker/Dockerfile ./worker
+        docker build -t bhupesh0215/multi-client:latest -t bhupesh0215/multi-client:$GIT_SHA -f ./client/Dockerfile ./client
+        docker build -t bhupesh0215/multi-server:latest -t bhupesh0215/multi-server:$GIT_SHA -f ./server/Dockerfile ./server
+        docker build -t bhupesh0215/multi-worker:latest -t bhupesh0215/multi-worker:$GIT_SHA -f ./worker/Dockerfile ./worker
 
         
     - name: Push Docker image
