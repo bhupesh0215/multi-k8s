@@ -56,19 +56,19 @@ jobs:
         docker build -t multi-server:latest -t multi-server:$GIT_SHA ./server
         docker build -t multi-worker:latest -t multi-worker:$GIT_SHA ./worker
 
-    - name: Tag Docker image
-      run: |
-        docker tag multi-client bhupesh0215/multi-client:v5
-        docker tag multi-nginx bhupesh0215/multi-nginx:v5
-        docker tag multi-server bhupesh0215/multi-server:v5
-        docker tag multi-worker bhupesh0215/multi-worker:v5
+    # - name: Tag Docker image
+    #   run: |
+    #     docker tag multi-client bhupesh0215/multi-client:v5
+    #     docker tag multi-nginx bhupesh0215/multi-nginx:v5
+    #     docker tag multi-server bhupesh0215/multi-server:v5
+    #     docker tag multi-worker bhupesh0215/multi-worker:v5
         
-    - name: Push Docker image
-      run: |
-        docker push bhupesh0215/multi-client:v5
-        docker push bhupesh0215/multi-nginx:v5
-        docker push bhupesh0215/multi-server:v5
-        docker push bhupesh0215/multi-worker:v5
+    # - name: Push Docker image
+    #   run: |
+    #     docker push bhupesh0215/multi-client:v5
+    #     docker push bhupesh0215/multi-nginx:v5
+    #     docker push bhupesh0215/multi-server:v5
+    #     docker push bhupesh0215/multi-worker:v5
     
     # Deploy to GKE
     - name: Deploy to GKE
