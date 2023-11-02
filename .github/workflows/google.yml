@@ -51,10 +51,10 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t multi-client ./client
-        docker build -t multi-nginx ./nginx
-        docker build -t multi-server ./server
-        docker build -t multi-worker ./worker
+        docker build -t multi-client:latest -t multi-client:$GIT_SHA ./client
+        docker build -t multi-nginx:latest -t multi-nginx:$GIT_SHA ./nginx
+        docker build -t multi-server:latest -t multi-server:$GIT_SHA ./server
+        docker build -t multi-worker:latest -t multi-worker:$GIT_SHA ./worker
 
     - name: Tag Docker image
       run: |
