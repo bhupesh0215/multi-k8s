@@ -52,10 +52,6 @@ jobs:
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
         project_id: $PROJECT_ID
 
-    - name: Configure Docker
-      run: gcloud auth configure-docker
-
-
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
 
@@ -74,6 +70,17 @@ jobs:
         docker push bhupesh0215/multi-client
         docker push bhupesh0215/multi-server
         docker push bhupesh0215/multi-worker
+    
+    # Prepare for deploy
+    - name: Prepare for deploy
+      run: | 
+        curl https://sdk.cloud.google.com | bash > /dev/null
+        source $HOME/google-cloud-sdk/path.bash.inc
+        gcloud components update kubectl
+        gcloud auth activate-service-account --key-file service-account.json
+        gcloud config set project $PROJECT_ID
+        gcloud config set compute/zone asia-southeast1-a
+        gcloud container clusters get-credentials multi-cluster
     
     # # Deploy to GKE
     # - name: Deploy to GKE
