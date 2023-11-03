@@ -21,6 +21,7 @@ env:
   GKE_CLUSTER: multi-k8s-cluster    # TODO: update to cluster name
   GKE_ZONE: asia-southeast1-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: multi-k8s-deployment # TODO: update to deployment name
+  CLOUDSDK_CORE_DISABLE_PROMPTS: 1
   
 jobs:
   setup-build-publish-deploy:
