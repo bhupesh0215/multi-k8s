@@ -75,15 +75,15 @@ jobs:
         gcloud components update kubectl
         gcloud config set project $PROJECT_ID
         gcloud config set compute/zone asia-southeast1-a
-        gcloud container clusters get-credentials multi-cluster
+        gcloud container clusters get-credentials multi-cluster-2
     
-    # # Deploy to GKE
-    # - name: Deploy to GKE
-    #   run: |
-    #     kubectl apply -f k8s
-    #     kubectl set image deployments/client-deployment server=bhupesh0215/multi-client:$GIT_SHA
-    #     kubectl set image deployments/server-deployment server=bhupesh0215/multi-server:$GIT_SHA
-    #     kubectl set image deployments/worker-deployment server=bhupesh0215/multi-worker:$GIT_SHA
+    # Deploy to GKE
+    - name: Deploy to GKE
+      run: |
+        kubectl apply -f k8s
+        kubectl set image deployments/client-deployment server=bhupesh0215/multi-client:$GIT_SHA
+        kubectl set image deployments/server-deployment server=bhupesh0215/multi-server:$GIT_SHA
+        kubectl set image deployments/worker-deployment server=bhupesh0215/multi-worker:$GIT_SHA
 
 
 
